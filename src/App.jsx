@@ -1,20 +1,24 @@
+import { useState } from "react";
 import Card from "./components/Card";
 
 function App() {
-  const handleClick = (id) => {
-    console.log(`Clicked card with ID: ${id}`);
-  };
-
-  const cardData = {
-    id: 1,
-    src: "/public/jay.png",
-    matched: false,
-  };
+  const cardImages = [
+    { src: "/public/cole.webp", matched: false },
+    { src: "/public/jay.png", matched: false },
+    { src: "/public/kai.webp", matched: false },
+    { src: "/public/Lloyd.webp", matched: false },
+    { src: "/public/MaitreWu.png", matched: false },
+    { src: "/public/Zane.webp", matched: false },
+  ];
 
   return (
     <div className="App">
-      <h1>Test de composant Card</h1>
-      <Card cardData={cardData} handleClick={handleClick} />
+      <h1>Magic Match</h1>
+      <div className="card-grid">
+        {cardImages.map((card, index) => (
+          <Card key={index} card={card} />
+        ))}
+      </div>
     </div>
   );
 }

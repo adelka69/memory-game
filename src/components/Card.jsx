@@ -1,22 +1,37 @@
+import PropTypes from "prop-types";
 import "./Card.css";
 
-const Card = ({ cardData, handleClick }) => {
-  const { id, src, matched } = cardData;
-
-  const handleClickCard = () => {
-    if (!matched) {
-      handleClick(id);
+const Card = ({ card, handleChoice, flipped, disabled }) => {
+  const handleClick = () => {
+    if (!disabled) {
+      handleChoice(card);
     }
   };
 
   return (
-    <div
-      className={`card ${matched ? "matched" : ""}`}
-      onClick={handleClickCard}
-    >
-      <img src={src} alt={`Card ${id}`} />
+    <div className="card" id={`card-${card.id}`}>
+      <div className={flipped ? "flipped" : ""}>
+        <img className="front" src={card.src} alt="card front" />
+        <img
+          className="back"
+          src="/public/cover.webp"
+          onClick={handleClick}
+          alt="card back"
+        />
+      </div>
     </div>
   );
+};
+
+Card.propTypes = {
+  card: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    src: PropTypes.string.isRequired,
+    matched: PropTypes.bool.isRequired,
+  }).isRequired,
+  handleChoice: PropTypes.func.isRequired,
+  flipped: PropTypes.bool.isRequired,
+  disabled: PropTypes.bool.isRequired,
 };
 
 export default Card;
