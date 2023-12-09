@@ -1,3 +1,5 @@
+import "./Card.css";
+
 const Card = ({ cardData, handleClick }) => {
   const { id, src, matched } = cardData;
 
