@@ -68,6 +68,7 @@ function App() {
     <div className="App">
       <h1>Wildy Match</h1>
       <button onClick={shuffleCards}>New game</button>
+      <p>Turns: {turns}</p>
       <div className="card-grid">
         {cards.map((card, index) => (
           <Card
@@ -79,7 +80,6 @@ function App() {
           />
         ))}
       </div>
-      <p>Turns: {turns}</p>
     </div>
   );
 }
