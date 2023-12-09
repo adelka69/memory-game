@@ -15,4 +15,3 @@ To run this project locally, follow these steps:
 
 5. ## Credits
 This project was created by [Adel KARA].
->>>>>>> 893b5b5022e8d26e0d511148ebed5f50f80bc1cb
