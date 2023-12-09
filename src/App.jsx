@@ -13,7 +13,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Magic Match</h1>
+      <h1>Wildy Match</h1>
+      <button type="button">New game</button>
       <div className="card-grid">
         {cardImages.map((card, index) => (
           <Card key={index} card={card} />
