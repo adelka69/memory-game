@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "./components/Card";
+import "./App.css";
 
 const cardImages = [
   { src: "/public/cole.webp", matched: false },
@@ -65,7 +66,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Magic Match</h1>
+      <h1>Wildy Match</h1>
       <button onClick={shuffleCards}>New game</button>
       <div className="card-grid">
         {cards.map((card, index) => (
