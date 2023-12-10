@@ -20,11 +20,6 @@ function App() {
   const [disabled, setDisabled] = useState(false);
   const [isGameResolved, setIsGameResolved] = useState(false);
 
-  // Ajoutez une fonction pour vérifier si toutes les cartes sont appariées
-  const areAllCardsMatched = () => {
-    return cards.every((card) => card.matched);
-  };
-
   // Ajoutez une fonction pour gérer l'action une fois que toutes les cartes sont trouvées
   const handleAllCardsMatched = () => {
     setIsGameResolved(true);
@@ -47,6 +42,9 @@ function App() {
   };
 
   useEffect(() => {
+    const areAllCardsMatched = () => {
+      return cards.every((card) => card.matched);
+    };
     if (choiceOne && choiceTwo) {
       setDisabled(true);
       if (choiceOne.src === choiceTwo.src) {
@@ -60,14 +58,14 @@ function App() {
           });
         });
         setTimeout(() => resetTurn(), 1000);
-        if (areAllCardsMatched()) {
-          handleAllCardsMatched();
-        }
       } else {
         setTimeout(() => resetTurn(), 1000);
       }
     }
-  }, [choiceOne, choiceTwo, areAllCardsMatched]);
+    if (areAllCardsMatched()) {
+      handleAllCardsMatched();
+    }
+  }, [choiceOne, choiceTwo]);
 
   const resetTurn = () => {
     setChoiceOne(null);
@@ -82,9 +80,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Wildy Match</h1>
-      <button onClick={shuffleCards}>New game</button>
-      <p>Turns: {turns}</p>
+      <div className="title">Wildy Match</div>
+      <div className="gameNav">
+        <button onClick={shuffleCards}>New game</button>
+        <p>Turns: {turns}</p>
+      </div>
       {isGameResolved ? (
         <Bingo />
       ) : (
