@@ -1,13 +1,12 @@
 .bingo-container {
   text-align: center;
-  margin-top: 50px;
+  margin-top: -180px;
   font-size: 24px;
   color: rgb(20, 133, 231);
-  margin-top: 150px;
 }
 
 .bingo-container p {
-  margin-top: 50px;
+  margin-top: -40px;
   font-size: 40px;
 }
 

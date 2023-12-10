@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Card from "./components/Card";
+import Bingo from "./components/Bingo";
 import "./App.css";
 
 const cardImages = [
@@ -17,6 +18,17 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null);
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [disabled, setDisabled] = useState(false);
+  const [isGameResolved, setIsGameResolved] = useState(false);
+
+  // Ajoutez une fonction pour vérifier si toutes les cartes sont appariées
+  const areAllCardsMatched = () => {
+    return cards.every((card) => card.matched);
+  };
+
+  // Ajoutez une fonction pour gérer l'action une fois que toutes les cartes sont trouvées
+  const handleAllCardsMatched = () => {
+    setIsGameResolved(true);
+  };
 
   const shuffleCards = () => {
     const shuffledCards = [...cardImages, ...cardImages]
@@ -27,6 +39,7 @@ function App() {
     setChoiceTwo(null);
     setCards(shuffledCards);
     setTurns(0);
+    setIsGameResolved(false);
   };
 
   const handleChoice = (card) => {
@@ -47,11 +60,14 @@ function App() {
           });
         });
         setTimeout(() => resetTurn(), 1000);
+        if (areAllCardsMatched()) {
+          handleAllCardsMatched();
+        }
       } else {
         setTimeout(() => resetTurn(), 1000);
       }
     }
-  }, [choiceOne, choiceTwo]);
+  }, [choiceOne, choiceTwo, areAllCardsMatched]);
 
   const resetTurn = () => {
     setChoiceOne(null);
@@ -69,17 +85,21 @@ function App() {
       <h1>Wildy Match</h1>
       <button onClick={shuffleCards}>New game</button>
       <p>Turns: {turns}</p>
-      <div className="card-grid">
-        {cards.map((card, index) => (
-          <Card
-            key={index}
-            card={card}
-            handleChoice={handleChoice}
-            flipped={card === choiceOne || card === choiceTwo || card.matched}
-            disabled={disabled}
-          />
-        ))}
-      </div>
+      {isGameResolved ? (
+        <Bingo />
+      ) : (
+        <div className="card-grid">
+          {cards.map((card, index) => (
+            <Card
+              key={index}
+              card={card}
+              handleChoice={handleChoice}
+              flipped={card === choiceOne || card === choiceTwo || card.matched}
+              disabled={disabled}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
