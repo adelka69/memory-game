@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import "./Card.css";
 
+import cover from "../../public/cover.webp";
+
 const Card = ({ card, handleChoice, flipped, disabled }) => {
   const handleClick = () => {
     if (!disabled) {
@@ -14,7 +16,7 @@ const Card = ({ card, handleChoice, flipped, disabled }) => {
         <img className="front" src={card.src} alt="card front" />
         <img
           className="back"
-          src="/public/cover.webp"
+          src={cover}
           onClick={handleClick}
           alt="card back"
         />
